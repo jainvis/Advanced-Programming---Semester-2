@@ -8,7 +8,7 @@ public abstract class Driver {
 	static Scanner input = new Scanner(System.in);
 
 	public static Profile addProfile(){
-
+		input.nextLine();
 		System.out.println("Enter Name");
 		String name = input.nextLine();
 		System.out.println("Enter Age");
@@ -34,36 +34,31 @@ public abstract class Driver {
 
 	}
 
-	public static int displayProfile(String search, Profile adult){
-		int count = 0;
-		if(search.equals(adult.getName())){
+	public static void displayProfile(String search){
 			System.out.println("Name: "+adult.getName()+" ,Age: "+adult.getAge()+" ,Status: "+adult.getStatus());
-			count++;
-		}
-		return count;
 	}
 	
 	public static void updateProfile(Profile adult){
-		System.out.println("1. Update Name");
-		System.out.println("2. Update Age");
-		System.out.println("3. Update Status");
-		System.out.println("4. Go To Previous Menu");
-		int opt = input.nextInt();
+		int opt = 0;
+		do{
+			opt = uprofilemenu();
 		switch (opt){
 		case 1:
-			System.out.println("Enter new Name: ");
+			System.out.println("Enter new Name");
+			input.nextLine(); //Added to consume any spaces left after nextInt()
 			String nname = input.nextLine();
 			adult.setName(nname);
 			break;
 			
 		case 2:
-			System.out.println("Enter new Age: ");
+			System.out.println("Enter new Age:");
 			int nage = input.nextInt();
 			adult.setAge(nage);
 			break;
 			
 		case 3:
 			System.out.println("Enter new Status: ");
+			input.nextLine();
 			String nstatus = input.nextLine();
 			adult.setStatus(nstatus);
 			break;
@@ -71,7 +66,7 @@ public abstract class Driver {
 		case 4:
 			break;
 		}
-
+		}while(opt!=4);
 	}
 	
 	public static void deleteProfile(Profile adult){
@@ -86,10 +81,18 @@ public abstract class Driver {
 		}
 	}
 	
-	public static void addFriend(Profile adult){
-		System.out.println("Enter name of your Friend: ");
-		String friend = input.nextLine();
-		adult.setFriend(friend);
+	public static void addFriend(Profile profile, Profile friend){
+		if(profile instanceof Child && profile.getAge() - friend.getAge() < 4){
+		profile.setFriend(friend.getName());
+		}
+	}
+	
+	public static int uprofilemenu(){
+		System.out.println("1. Update Name");
+		System.out.println("2. Update Age");
+		System.out.println("3. Update Status");
+		System.out.println("4. Go To Previous Menu");
+		return input.nextInt();
 	}
 
 
