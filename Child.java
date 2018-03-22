@@ -25,13 +25,8 @@ public class Child extends Profile {
 		this(name, age, null, null, null, dependent);
 	}
 	
-	public String[] addDependent(){
-		System.out.println("Enter Name of First Dependent: ");
-		String d1 = input.nextLine();
-		System.out.println("Enter Name of Second Dependent: ");
-		String d2 = input.nextLine();
+	public void setDependent(String d1, String d2){
 		this.dependent = new String[]{d1,d2};
-		return dependent;
 	}
 	
 	public String[] getDependent(){return dependent;}

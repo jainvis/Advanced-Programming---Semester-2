@@ -2,7 +2,7 @@ package Assignment1;
 import java.util.*;
 
 import com.sun.prism.Image;
-public abstract class Profile {
+public class Profile {
 	
 	private String name;
 	private int age;
