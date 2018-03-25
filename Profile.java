@@ -8,9 +8,9 @@ public class Profile {
 	private int age;
 	private String status;
 	private Image photo;
-	private String friendlist[];
+	private ArrayList<String> friendlist = new ArrayList<String>();
 	
-	public Profile(String name, int age, String status, Image photo, String friendlist[]){
+	public Profile(String name, int age, String status, Image photo, ArrayList<String> friendlist){
 		
 		this.name = name;
 		this.age = age;
@@ -19,19 +19,19 @@ public class Profile {
 		this.friendlist = friendlist;
 	}
 	
-	public Profile(String name, int age, Image photo, String friendlist[]){
+	public Profile(String name, int age, Image photo, ArrayList<String> friendlist){
 		
-		this(name, age, null, photo, friendlist);	//Complete Constructor of the Class
+		this(name, age, null, photo, friendlist);	//If Status not given
 	}
 	
 	public Profile(String name, int age, String status){
 
-		this(name, age, status, null, null ); //Constructor if photo and friend list is not given
+		this(name, age, status, null, new ArrayList<String>()); //Constructor if photo and friend list is not given
 	}
 	
 	public Profile(String name, int age){
 
-		this(name, age, null, null, null ); //Constructor if only name and age are used
+		this(name, age, null, null, new ArrayList<String>() ); //Constructor if only name and age are used
 	}
 	
 	//Getters for the Class	
@@ -43,7 +43,7 @@ public class Profile {
 	
 	public Image getPhoto(){return photo;}
 	
-	public String[] getFriendlist(){return friendlist;}
+	public ArrayList<String> getFriendlist(){return friendlist;}
 	
 	//Setters for the Class
 	public void setName(String name){this.name = name;}
@@ -53,11 +53,8 @@ public class Profile {
 	public void setStatus(String status){this.status = status;}
 	
 	public void setFriend(String friend){
-		for(int i = 0;i < friend.length();i++){
-			if(friendlist[i]==null){
-				friendlist[i] = friend;
-			}
-		}
+		this.friendlist.add(friend);
+			
 	}
 		
 }

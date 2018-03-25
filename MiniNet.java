@@ -1,3 +1,6 @@
+// Author: Vishesh Jain
+// Student ID: S3666202
+
 package Assignment1;
 import java.util.*;
 public class MiniNet {
@@ -27,10 +30,12 @@ public class MiniNet {
 					boolean check3 = dependentCheck(list,d); //Check: The Dependent is not added in another dependent list
 					if (dep1 == null || dep2 == null || check3 == false){
 						list.remove(id);
-						System.out.println("Either one or both of your Dependents do not exist on SocioNet");
 						System.out.println("Your Profile was not added !!");
+						break;
 					}
-					break;
+					else{
+						System.out.println("Your Profile is added with Unique ID: "+id);
+						System.out.println("Remember this unique ID to access profile in future\n");}
 				}
 				else{
 					System.out.println("Your Profile is added with Unique ID: "+id);
@@ -43,7 +48,7 @@ public class MiniNet {
 				String search = input.nextLine();
 				Profile person = profileCheck(list, search);
 				if(person != null){
-					Driver.displayProfile(person, search);}
+					Driver.displayProfile(person);}
 				else{
 					System.out.println("Your Connection is not on SocioNet");
 				}
@@ -70,19 +75,22 @@ public class MiniNet {
 							input.nextLine();
 							System.out.println("Enter 'full name' of your Friend: ");
 							String friend = input.nextLine();
+							int count = 0;
 							for(int i : list.keySet()){
 								if(list.get(i).getName().equals(friend)){
 									Driver.addFriend(list.get(uid), list.get(i));
+									System.out.println("Your Friend is added to your friendlist");
+									count++;
 								}
-								else{System.out.println("Your Friend is not on SocioNet");}
 							}
+							if (count == 0){System.out.println("Your Friend is not on SocioNet");}
+							break;
+						case 5:
 							break;
 						}
-						break;
-
-					}while (subopt!=4);
-					break;
+					}while (subopt!=5);
 				}
+				break;
 			case 4:
 				break;
 			}
@@ -93,24 +101,29 @@ public class MiniNet {
 
 	public static Profile profileCheck(HashMap<Integer, Profile> list, String name){
 		Profile person = null;
+		int count = 0;
 		for(int i : list.keySet()){
 			if(list.get(i).getName().contains(name) == true){
 				person = list.get(i);
+				count++;
 			}
 		}
+		if(count == 0){System.out.println("Dependent Profile not found on SocioNet");}
 		return person;
 	}
-	
+
 	public static boolean dependentCheck(HashMap<Integer, Profile> list, String[] name){
 		boolean check = false;
+		int count = 0;
 		for(int i : list.keySet()){
 			if(list.get(i) instanceof Child){
-			if(((Child)list.get(i)).getDependent().equals(name)){
-				check = true;
+				if(Arrays.equals(name, ((Child)list.get(i)).getDependent())){
+					count++;
+				}
 			}
-			else{System.out.println("Your Dependents exists in another profile !");}
 		}
-		}
+		if(count==1){check = true;}
+		else{System.out.println("Your Dependents exists in another profile !");}
 		return check;
 	}
 
@@ -132,9 +145,10 @@ public class MiniNet {
 		System.out.println("2. Delete Profile");
 		System.out.println("3. Profile Details");
 		System.out.println("4. Add Friend");
+		System.out.println("5. Main Menu");
 		return input.nextInt();
 	}
-	
+
 	public static void inbuiltData(HashMap<Integer, Profile> data){
 		data.put(1001, new Adult("John Nash",30,"Mathematician"));
 		data.put(1002, new Adult("Eleanor Stier",30,"Nurse"));

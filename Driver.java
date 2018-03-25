@@ -27,9 +27,9 @@ public abstract class Driver {
 		}
 		
 		if(age<16 && age>2){
-			System.out.println("Enter Name of First Dependent");
+			System.out.println("Enter Full Name of First Dependent");
 			String dependent1 = input.nextLine();
-			System.out.println("Enter Name of Second Dependent");
+			System.out.println("Enter Full Name of Second Dependent");
 			String dependent2 = input.nextLine();
 			adult = new Child(name, age, status, new String[]{dependent1, dependent2});
 			((Child) adult).setDependent(dependent1, dependent2);
@@ -41,17 +41,18 @@ public abstract class Driver {
 
 	}
 
-	public static void displayProfile(Profile adult, String search){
+	public static void displayProfile(Profile adult){
 		System.out.println("Name: "+adult.getName()+" ,Age: "+adult.getAge()+" ,Status: "+adult.getStatus());
 	}
+	
 	public static void profileDetails(Profile profile){
 		if(profile instanceof Adult){
-			System.out.println("Name: "+adult.getName()+" ,Age: "+adult.getAge()+" ,Status: "+adult.getStatus());
-			System.out.println("Friend List: /n"+profile.getFriendlist());
+			System.out.println("Name: "+profile.getName()+" ,Age: "+profile.getAge()+" ,Status: "+profile.getStatus());
+			System.out.println("Friend List: \n"+profile.getFriendlist());
 		}
 		if(profile instanceof Child){
-			System.out.println("Name: "+adult.getName()+" ,Age: "+adult.getAge()+" ,Status: "+adult.getStatus());
-			System.out.println("Dependents: \n"+((Child) profile).getDependent());
+			System.out.println("Name: "+profile.getName()+" ,Age: "+profile.getAge()+" ,Status: "+profile.getStatus());
+			System.out.println("Dependents: \n"+Arrays.toString(((Child) profile).getDependent()));
 			System.out.println("Friend List: \n"+profile.getFriendlist());
 		}
 	}
