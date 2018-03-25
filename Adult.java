@@ -1,15 +1,17 @@
 package Assignment1;
 
+import java.util.*;
+
 import com.sun.prism.Image;
 
 public class Adult extends Profile {
 
-	public Adult(String name, int age, String status, Image photo, String[] friendlist) {
+	public Adult(String name, int age, String status, Image photo, ArrayList<String> friendlist) {
 		super(name, age, status, photo, friendlist);
 	}
 
-	public Adult(String name, int age, Image photo, String[] friendlist) {
-		super(name, age, null, photo, friendlist);
+	public Adult(String name, int age, Image photo, ArrayList<String> friendlist) {
+		super(name, age, photo, friendlist);
 	}
 
 	public Adult(String name, int age, String status) {
