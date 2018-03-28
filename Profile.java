@@ -16,7 +16,7 @@ public class Profile {
 		this.age = age;
 		this.status = status;
 		this.photo = photo;
-		this.friendlist = friendlist;
+		this.friendlist.addAll(friendlist);
 	}
 	
 	public Profile(String name, int age, Image photo, ArrayList<String> friendlist){
