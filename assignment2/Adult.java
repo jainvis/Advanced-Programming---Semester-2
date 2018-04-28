@@ -1,4 +1,5 @@
 package assignment;
+import java.awt.image.BufferedImage;
 import java.util.*;
 /**
  * Adult Sub-class of Profile
@@ -7,18 +8,18 @@ import java.util.*;
  * @author Vishesh Jain
  */
 
-import com.sun.prism.Image;
 
-public class Adult extends Profile {
+public class Adult extends Profile{
 	
 	private ArrayList<String> childlist = new ArrayList<String>();
+//	private ArrayList<T> partner = new ArrayList<T>();
 
-	public Adult(String name, int age, String status, Image photo, ArrayList<String> friendlist, ArrayList<String> childlist) {
-		super(name, age, status, photo, friendlist);
-		this.childlist.addAll(childlist);
+	public Adult(String name, int age, String status, BufferedImage photo, ArrayList<String> friendlist, ArrayList<String> childlist) {
+		super(name, 0, status, photo, friendlist);
+	this.childlist.addAll(childlist);
 	}
 
-	public Adult(String name, int age,String status, Image photo, ArrayList<String> friendlist) {
+	public Adult(String name, int age,String status, BufferedImage photo, ArrayList<String> friendlist) {
 		super(name, age, status, photo, friendlist);
 	}
 
@@ -42,5 +43,14 @@ public class Adult extends Profile {
 	public void setChildlist(String childname) {
 		this.childlist.add(childname);
 	}
+
+//	public void setPartner(Couple one) {
+//		this.partner.add(one);
+//	}
+
+//	@Override
+//	public void partner(Profile one, Profile two) {
+//		
+//	}
 
 }

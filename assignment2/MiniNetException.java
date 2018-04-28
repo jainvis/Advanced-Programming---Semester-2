@@ -5,4 +5,8 @@ public class MiniNetException extends Exception {
 		super(message);
 	}
 
+	public MiniNetException() {
+		super();
+	}
+
 }

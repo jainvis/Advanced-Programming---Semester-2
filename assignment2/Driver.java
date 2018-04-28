@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * Driver Class to store profile information
  * Execute all actions on a profile
- * @version 8.0 28 Mar 2018
+ * @version 10.0 28 Apr 2018
  * @author Vishesh Jain
  */
 
@@ -29,7 +29,15 @@ public abstract class Driver implements Data {
 				do{
 					id = randomGenerator.nextInt(9999); //Unique ID is required to be generated
 				}while(list.containsKey(id));
+				try{
 				list.put(id, addProfile(list));
+				}
+				catch (NoSuchAgeException e1) {
+					System.err.println(e1.getMessage());
+				}
+				catch (NoParentException e2){
+					System.err.println(e2.getMessage());
+				}
 				if(list.get(id) != null){ 
 					System.out.println("Your Profile is added with Unique ID: "+id);
 					System.out.println("Remember this unique ID to access profile in future\n");
@@ -70,7 +78,12 @@ public abstract class Driver implements Data {
 							Driver.updateProfile(list.get(uid));
 							break;
 						case 2:
-							list = Driver.deleteProfile(uid, list);
+							try{
+								list = Driver.deleteProfile(uid, list);
+							}
+							catch(NoParentException e){
+								System.err.println(e.getMessage());
+							}
 							break;
 						case 3:
 							Driver.profileDetails(list.get(uid));
@@ -122,7 +135,11 @@ public abstract class Driver implements Data {
 									break;
 								}
 								else{
-									((Child) list.get(uid)).setDependent(dep1.getName(),dep2.getName());
+									
+										((Child) list.get(uid)).setDependent(dep1.getName(),dep2.getName());
+										System.err.println(list.get(uid).getName()+" has No Parents !");
+										System.err.println("Therefore, Cannot be added.");
+									
 									((Adult) dep1).setChildlist(list.get(uid).getName());
 									((Adult) dep2).setChildlist(list.get(uid).getName());
 									System.out.println("Dependents Updated !");
@@ -156,7 +173,7 @@ public abstract class Driver implements Data {
 	}
 
 
-	public static Profile addProfile(HashMap<Integer, Profile> list){
+	public static Profile addProfile(HashMap<Integer, Profile> list) throws NoParentException, NoSuchAgeException{
 		Profile person = null;
 		System.out.println("Enter Full Name: (Ex: John Doe)");
 		String name = input.nextLine();
@@ -194,7 +211,7 @@ public abstract class Driver implements Data {
 			Profile dep2 = profileCheck(dependent2);
 			boolean check3 = dependentCheck(new String[]{dep1.getName(),dep2.getName()});
 			if (dep1 == null || dep2 == null || check3 == false){
-				System.out.println("Dependents check Failed !");
+				throw new NoParentException("Dependents Check Failed");
 			}
 			else{
 				person = new Child(name, age, status, new String[]{dependent1, dependent2});
@@ -203,12 +220,16 @@ public abstract class Driver implements Data {
 				((Adult) dep2).setChildlist(person.getName());
 			}
 		}
-		else if(age>16){
+		else if(age<0 | age>150){
+			throw new NoSuchAgeException("This age is not possible in today's world");
+		}
+			else {
 			person = new Adult(name, age, status);
 		}
-		else{
-			System.out.println("You are too young to join SocioNet !");
-		}
+//		Require to add YoungChild here
+//		else{
+//			System.out.println("You are too young to join SocioNet !");
+//		}
 		return person;
 
 	}
@@ -253,7 +274,13 @@ public abstract class Driver implements Data {
 				} catch (InputMismatchException e) {
 					System.err.println("Enter a valid integer for Age !");
 				}
+				try {
 				adult.setAge(nage);
+				}
+				catch (NoSuchAgeException e) {
+					System.err.println(adult.getName()+" has impossible age.");
+					System.err.println(e.getMessage());
+				}
 				break;
 
 			case 3:
@@ -272,12 +299,17 @@ public abstract class Driver implements Data {
 		}while(opt!=4);
 	}
 
-	public static HashMap<Integer, Profile> deleteProfile(int id, HashMap<Integer, Profile> plist){
+	public static HashMap<Integer, Profile> deleteProfile(int id, HashMap<Integer, Profile> plist) throws NoParentException{
 		System.out.println("Are you Sure? (Y/N)");
 		String choice = input.nextLine();
 		switch (choice){
 		case "Y":
+			if(((Adult) plist.get(id)).getChildlist() != null){
+				throw new NoParentException("Dependent Exist");
+			}
+			else{
 			plist.remove(id);
+			}
 			break;
 		case "N":
 			break;
