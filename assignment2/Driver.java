@@ -50,7 +50,7 @@ public abstract class Driver implements Data {
 			case 2:
 				System.out.println("Enter name of the person");
 				String search = input.nextLine();
-				Profile person = profileCheck(search);
+				Profile person = profileCheck(list, search);
 				if(person != null){
 					displayProfile(person);
 				}
@@ -93,7 +93,7 @@ public abstract class Driver implements Data {
 							System.out.println("Enter name of your Friend: "); // Changed statement
 //							String friend = input.nextLine().toLowerCase();
 							String f = input.nextLine().toLowerCase();
-							Profile friend = Driver.profileCheck(f); //To check if friend is on socioNet
+							Profile friend = Driver.profileCheck(list,f); //To check if friend is on socioNet
 							if(friend!= null){
 								try {
 									Driver.addFriend(list.get(uid), friend);
@@ -126,8 +126,8 @@ public abstract class Driver implements Data {
 								String d1 = input.nextLine().toLowerCase();
 								System.out.println("Enter full name of second dependent: ");
 								String d2 = input.nextLine().toLowerCase();
-								Profile dep1 = Driver.profileCheck(d1); //To check if the dependent is on SocioNet
-								Profile dep2 = Driver.profileCheck(d2);
+								Profile dep1 = Driver.profileCheck(list,d1); //To check if the dependent is on SocioNet
+								Profile dep2 = Driver.profileCheck(list,d2);
 								boolean check3 = Driver.dependentCheck(new String[]{dep1.getName(),dep2.getName()}); 
 								if (dep1 == null || dep2 == null || check3 == false){
 									System.out.println("Dependents check Failed !");
@@ -207,8 +207,8 @@ public abstract class Driver implements Data {
 			String dependent1 = input.nextLine().toLowerCase();
 			System.out.println("Enter Full Name of Second Dependent: (Ex: Jane Doe)");
 			String dependent2 = input.nextLine().toLowerCase();
-			Profile dep1 = profileCheck(dependent1);
-			Profile dep2 = profileCheck(dependent2);
+			Profile dep1 = profileCheck(list, dependent1);
+			Profile dep2 = profileCheck(list, dependent2);
 			boolean check3 = dependentCheck(new String[]{dep1.getName(),dep2.getName()});
 			if (dep1 == null || dep2 == null || check3 == false){
 				throw new NoParentException("Dependents Check Failed");
@@ -234,8 +234,10 @@ public abstract class Driver implements Data {
 
 	}
 
-	public static void displayProfile(Profile person){
-		System.out.println("Name: "+person.getName().toUpperCase()+" ,Age: "+person.getAge()+" ,Status: "+person.getStatus().toUpperCase());
+	public static String displayProfile(Profile person){
+		String display = ("Name: "+person.getName().toUpperCase()+" ,Age: "+person.getAge()+" ,Status: "+person.getStatus().toUpperCase());
+//		System.out.println("Name: "+person.getName().toUpperCase()+" ,Age: "+person.getAge()+" ,Status: "+person.getStatus().toUpperCase());
+		return display;
 	}
 
 	public static void profileDetails(Profile profile){
@@ -379,7 +381,7 @@ public abstract class Driver implements Data {
 		return check;
 	}
 
-	public static Profile profileCheck(String name){
+	public static Profile profileCheck(HashMap<Integer, Profile> list, String name){
 		Profile person = null;
 		int count = 0;
 		for(int i : list.keySet()){
@@ -394,8 +396,8 @@ public abstract class Driver implements Data {
 
 	public static void connectionCheck(String n1, String n2){
 		//check connection method
-		Profile one = profileCheck(n1);
-		Profile two = profileCheck(n2);
+		Profile one = profileCheck(list,n1);
+		Profile two = profileCheck(list,n2);
 		if((one instanceof Adult && two instanceof Child)){
 			if(Arrays.asList(((Child) two).getDependent()).contains(one.getName())==true){
 				System.out.println(two.getName().toUpperCase()+" is a child of "+one.getName().toUpperCase());
