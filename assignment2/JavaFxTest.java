@@ -26,6 +26,7 @@ public class JavaFxTest extends Application implements Data{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		//main method
 		list.putAll(inbuilt);
 		Application.launch(args);
 
