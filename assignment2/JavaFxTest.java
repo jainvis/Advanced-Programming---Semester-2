@@ -31,7 +31,7 @@ public class JavaFxTest extends Application implements Data{
 		Application.launch(args);
 
 	}
-
+	//test comments
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -219,7 +219,42 @@ public class JavaFxTest extends Application implements Data{
 			
 			delete.setOnAction((ActionEvent deProfile) -> {
 				stageAccess.close();
-				// Code to Delete Profile
+				// Code to Delete Profile, will contain another menu to display the deletion
+				Stage stageUpdate = new Stage(); // Create a new stage
+				stageUpdate.setTitle("DELETE PROFILE"); // Set the stage title
+				// Set a scene with a button in the stage
+				GridPane paneUP = new GridPane();
+				paneUP.setAlignment(Pos.CENTER);
+				paneUP.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+				paneUP.setHgap(5.5);
+				paneUP.setVgap(5.5);
+				Button deleteUP = new Button("Delete");
+				Button backUP = new Button("Back");
+
+				// Place nodes in the pane
+				paneUP.add(new Label("-----DELETE PROFILE-------"),0,0);
+				paneUP.add(new Label("Name"), 0, 1);
+				paneUP.add(new Label(), 1, 1);
+				paneUP.add(new Label("Age"), 0, 2);
+				paneUP.add(new Label(), 1, 2);
+				paneUP.add(new Label("Status"), 0, 3);
+				paneUP.add(new Label(), 1, 3);
+				paneUP.add(deleteUP, 0, 4);
+				paneUP.add(backUP, 1, 4);
+
+				deleteUP.setOnAction((ActionEvent save) -> {
+
+				});
+				
+				backUP.setOnAction((ActionEvent back) -> {
+					stageUpdate.close();
+					stageAccess.show();
+				});
+				
+				Scene sceneUpdate = new Scene(paneUP);
+				stageUpdate.setScene(sceneUpdate);
+				stageUpdate.show();
+
 			});
 			
 			details.setOnAction((ActionEvent dProfile) -> {
