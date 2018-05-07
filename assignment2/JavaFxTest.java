@@ -13,9 +13,11 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -218,43 +220,14 @@ public class JavaFxTest extends Application implements Data{
 			});
 			
 			delete.setOnAction((ActionEvent deProfile) -> {
-				stageAccess.close();
-				// Code to Delete Profile, will contain another menu to display the deletion
-				Stage stageUpdate = new Stage(); // Create a new stage
-				stageUpdate.setTitle("DELETE PROFILE"); // Set the stage title
-				// Set a scene with a button in the stage
-				GridPane paneUP = new GridPane();
-				paneUP.setAlignment(Pos.CENTER);
-				paneUP.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
-				paneUP.setHgap(5.5);
-				paneUP.setVgap(5.5);
-				Button deleteUP = new Button("Delete");
-				Button backUP = new Button("Back");
-
-				// Place nodes in the pane
-				paneUP.add(new Label("-----DELETE PROFILE-------"),0,0);
-				paneUP.add(new Label("Name"), 0, 1);
-				paneUP.add(new Label(), 1, 1);
-				paneUP.add(new Label("Age"), 0, 2);
-				paneUP.add(new Label(), 1, 2);
-				paneUP.add(new Label("Status"), 0, 3);
-				paneUP.add(new Label(), 1, 3);
-				paneUP.add(deleteUP, 0, 4);
-				paneUP.add(backUP, 1, 4);
-
-				deleteUP.setOnAction((ActionEvent save) -> {
-
-				});
+				//stageAccess.close();
 				
-				backUP.setOnAction((ActionEvent back) -> {
-					stageUpdate.close();
-					stageAccess.show();
-				});
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Confirmation Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Are you sure you want to delete");
+				alert.showAndWait();
 				
-				Scene sceneUpdate = new Scene(paneUP);
-				stageUpdate.setScene(sceneUpdate);
-				stageUpdate.show();
-
 			});
 			
 			details.setOnAction((ActionEvent dProfile) -> {
@@ -278,6 +251,54 @@ public class JavaFxTest extends Application implements Data{
 
 		});
 
+		//Action for Check Connection
+		btcheckconn.setOnAction((ActionEvent checkconn) -> {
+			primaryStage.hide();
+			// Code to update Profile, will contain another menu to select the update
+			Stage stageDisplay = new Stage(); // Create a new stage
+			stageDisplay.setTitle("CHECK CONNECTION"); // Set the stage title
+			// Set a scene with a button in the stage
+			GridPane paneDP = new GridPane();
+			paneDP.setAlignment(Pos.CENTER);
+			paneDP.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+			paneDP.setHgap(5.5);
+			paneDP.setVgap(5.5);
+			Button okDP = new Button("Ok");
+			Button backDP = new Button("Back");
+			TextField name1 = new TextField();
+			TextField name2 = new TextField();
+			
+			// Place nodes in the pane
+			paneDP.add(new Label("-----CHECK CONNECTION-------"),0,0);
+			paneDP.add(new Label("Enter name of first person"), 0, 1);
+			paneDP.add(name1, 1, 1);
+			paneDP.add(new Label("Enter name of second person"), 0, 2);
+			paneDP.add(name2, 1, 2);
+			paneDP.add(okDP, 0, 3);
+			paneDP.add(backDP, 1, 3);
+			
+			// Still required to be worked on to display print statements and handle exceptions
+			okDP.setOnAction((ActionEvent confirm) -> {
+				String search = name1.getText();
+				// Use Profile does not exist exception handling here
+				// Still Requires work to change display profile method
+				// Each component will be displayed in tables
+				
+			});
+			
+			backDP.setOnAction((ActionEvent back) -> {
+				stageDisplay.close();
+				primaryStage.show();
+			});
+			
+			Scene sceneDisplay = new Scene(paneDP);
+			stageDisplay.setScene(sceneDisplay);
+			stageDisplay.show();
+			
+
+		});
+
+		
 		//Action to Exit
 		btexit.setOnAction((ActionEvent exit) -> {
 			System.exit(0);
