@@ -251,6 +251,87 @@ public class JavaFxTest extends Application implements Data{
 
 		});
 
+		//Action for relation
+		relation.setOnAction((ActionEvent addRelation) -> {
+			stageAccess.close();
+			//Code to add a relation, will contain another menu to trigger which relation
+			Stage stageUpdate = new Stage(); // Create a new stage
+			stageUpdate.setTitle("ADD RELATION"); // Set the stage title
+			// Set a scene with a button in the stage
+			GridPane paneAR = new GridPane();
+			paneAR.setAlignment(Pos.CENTER);
+			paneAR.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+			paneAR.setHgap(6.5);
+			paneAR.setVgap(6.5);
+			//Button saveUP = new Button("Save");
+			Button friendAR = new Button("Friend");
+			Button parentAR = new Button("Parent");
+			Button childAR = new Button("Child");
+			Button coupleAR = new Button("Couple");
+			Button colleagueAR = new Button("Colleague");
+			Button classmateAR = new Button("Classmate");
+			Button backAR = new Button("Back");
+
+			// Place nodes in the pane
+			paneAR.add(new Label("-----UPDATE PROFILE-------"),0,0);
+			paneAR.add(new Label("Full Name"), 0, 1);
+			paneAR.add(new TextField(), 1, 1);
+			//paneUP.add(saveUP, 0, 4);
+			paneAR.add(friendAR, 0, 2);
+			paneAR.add(parentAR, 0, 3);
+			paneAR.add(childAR, 0, 4);
+			paneAR.add(coupleAR, 0, 5);
+			paneAR.add(colleagueAR, 0, 6);
+			paneAR.add(classmateAR, 0, 7);
+			paneAR.add(backAR, 0, 8);
+			
+
+			//saveUP.setOnAction((ActionEvent save) -> {
+
+			//});
+			
+			friendAR.setOnAction((ActionEvent friend) -> {
+
+			});
+			
+			parentAR.setOnAction((ActionEvent parent) -> {
+
+			});
+
+			childAR.setOnAction((ActionEvent child) -> {
+
+			});
+
+			coupleAR.setOnAction((ActionEvent couple) -> {
+
+			});
+
+			classmateAR.setOnAction((ActionEvent classmate) -> {
+
+			});
+
+			backAR.setOnAction((ActionEvent back) -> {
+				stageUpdate.close();
+				stageAccess.show();
+			});
+			
+			Scene sceneUpdate = new Scene(paneAR);
+			stageUpdate.setScene(sceneUpdate);
+			stageUpdate.show();
+
+		});
+		
+		backACP.setOnAction((ActionEvent back) -> {
+			stageAccess.close();
+			primaryStage.show();
+		});
+
+		Scene sceneAccess = new Scene(paneACP);
+		stageAccess.setScene(sceneAccess);
+		stageAccess.show();
+
+	});
+
 		//Action for Check Connection
 		btcheckconn.setOnAction((ActionEvent checkconn) -> {
 			primaryStage.hide();
