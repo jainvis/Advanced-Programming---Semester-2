@@ -1,0 +1,5 @@
+1001,Alex Smith,21,student at RMIT,
+1002,Ben Turner,35,manager at Coles,BenPhoto.jpg
+1003,Hannah White,14,student at PLC,Hannah.png
+1004,Zoe Foster,28,Founder of ZFX,
+1005,Mark Turner,2, ,Mark.jpeg
