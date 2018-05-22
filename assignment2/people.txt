@@ -1,0 +1,8 @@
+1001,john nash,30,Mathematician
+1002,eleanor stier,30,Nurse
+1003,david stier,10,  
+1004,alan turing,42,Computer Scientist
+1005,joan clarke,37,Cryptanalyst
+1006,paul jobs,44,United States Coastguard
+1007,clara hagopian,42,Armenian
+1008,steve jobs,13,Future Innovator

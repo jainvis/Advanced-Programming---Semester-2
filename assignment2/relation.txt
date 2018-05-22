@@ -1,0 +1,10 @@
+david stier,john nash,parent
+david stier,eleanor stier,parent
+john nash,eleanor stier,couple
+alan turing,joan clarke,couple
+alan turing,john nash,colleague
+paul jobs,clara hagopian,couple
+paul jobs,steve jobs,child
+steve jobs,clara hagopian,parent
+paul jobs,john nash,friend
+david stier,steve jobs,classmate
